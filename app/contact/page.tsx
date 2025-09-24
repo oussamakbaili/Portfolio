@@ -1,16 +1,16 @@
-import { HeroSection } from "@/components/hero-section"
+import { ContactSection } from "@/components/contact-section"
 import { Sidebar } from "@/components/sidebar"
 import { GSAPProvider } from "@/components/gsap-provider"
 import { GeometricElements } from "@/components/geometric-elements"
 
-export default function Home() {
+export default function Contact() {
   return (
     <GSAPProvider>
       <div className="min-h-screen relative">
         <GeometricElements />
         <Sidebar />
         <main className="ml-0 lg:ml-20 transition-all duration-500">
-          <HeroSection />
+          <ContactSection />
         </main>
       </div>
     </GSAPProvider>
