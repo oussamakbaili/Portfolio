@@ -123,12 +123,6 @@ export function AboutSection() {
 
   return (
     <section ref={sectionRef} id="about" className="py-32 bg-background relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-20 w-48 h-48 bg-primary/8 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-primary/8 rounded-full blur-lg animate-pulse delay-500"></div>
-      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-start">

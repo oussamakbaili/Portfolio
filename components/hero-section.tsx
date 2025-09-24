@@ -104,9 +104,9 @@ export function HeroSection() {
               {/* Main image container */}
               <div className="relative w-32 h-32 rounded-full overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-4 border-primary/30 group-hover:border-primary/50 transition-all duration-500">
                 <img
-                  src="/professional-developer-portrait.png"
+                  src="/ussama.png"
                   alt="Oussama Kbaili"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-center scale-125 translate-y-8 group-hover:scale-110 transition-transform duration-700"
                 />
               </div>
             </div>

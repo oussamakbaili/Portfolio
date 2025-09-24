@@ -123,247 +123,298 @@ export function WorksSection() {
   ]
 
   useEffect(() => {
-    if (!containerRef.current || !cardsRef.current || !wrapperRef.current) return
+    if (!containerRef.current) return
 
-    const mm = gsap.matchMedia()
+    const cards = gsap.utils.toArray(".project-card") as HTMLElement[]
+    const timelines: gsap.core.Timeline[] = []
+    const eventListeners: Array<{ element: HTMLElement; type: string; handler: () => void }> = []
+    
+    // Set initial state for all cards
+    gsap.set(cards, {
+      opacity: 0,
+      y: 60,
+      scale: 0.95,
+    })
 
-    mm.add("(min-width: 1024px)", () => {
-      // Desktop stacked cards flip animation
-      const cards = gsap.utils.toArray(".work-card") as HTMLElement[]
-      const totalCards = cards.length
-      
-      // Set initial positions - stack all cards on top of each other
-      gsap.set(cards, {
-        zIndex: (i) => totalCards - i,
-        scale: (i) => 1 - (i * 0.05), // Slightly scale down cards behind
-        y: (i) => i * -10, // Slight vertical offset for stacking effect
-        rotationY: 0,
-        transformOrigin: "center center",
-      })
-
-      // Create main timeline for the scroll animation
-      const mainTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          pin: true,
-          scrub: 1,
-          start: "top top",
-          end: () => `+=${window.innerHeight * (totalCards - 1)}`,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        }
-      })
-
-      // Animate each card flip and exit
-      cards.forEach((card, index) => {
-        if (index < totalCards - 1) {
-          // Flip and slide out animation for each card (except the last one)
-          mainTl.to(card, {
-            x: -window.innerWidth,
-            rotationY: -90,
-            scale: 0.8,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.inOut",
-          }, index * 0.8)
-          
-          // Reveal the next card
-          if (index < totalCards - 1) {
-            mainTl.to(cards[index + 1], {
-              scale: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "back.out(1.7)",
-            }, index * 0.8 + 0.4)
-          }
-        }
-      })
-
-      return () => {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    // Animate cards on scroll with stagger
+    const cardTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 70%",
+        toggleActions: "play none none reverse",
       }
     })
 
-    mm.add("(max-width: 1023px)", () => {
-      // Mobile vertical scroll with fade animations
-      const cards = gsap.utils.toArray(".work-card") as HTMLElement[]
-      
-      // Reset any desktop transforms
-      gsap.set(cards, { clearProps: "all" })
-      
-      cards.forEach((card, index) => {
-        gsap.fromTo(card,
-          {
-            opacity: 0,
-            y: 50,
-            scale: 0.9,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        )
-      })
+    cardTl.to(cards, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: {
+        amount: 0.6,
+        from: "start",
+      }
     })
 
+    // Individual card hover animations with delay to ensure DOM is ready
+    setTimeout(() => {
+      cards.forEach((card) => {
+        if (!card) return
+        
+        const cardContent = card.querySelector('.card-content') as HTMLElement
+        const cardImage = card.querySelector('.card-image') as HTMLElement
+        const cardOverlay = card.querySelector('.card-overlay') as HTMLElement
+        const cardTitle = card.querySelector('.card-title') as HTMLElement
+        const cardMeta = card.querySelector('.card-meta') as HTMLElement
+        const cardTech = card.querySelector('.card-tech') as HTMLElement
+        const cardButton = card.querySelector('.card-button') as HTMLElement
+
+        // Only proceed if essential elements exist (reduced requirements)
+        if (cardImage && cardOverlay) {
+        try {
+          // Create hover timeline
+          const hoverTl = gsap.timeline({ paused: true })
+          timelines.push(hoverTl)
+          
+          // Animate core elements
+          hoverTl
+            .to(cardImage, { 
+              scale: 1.05, 
+              duration: 0.4, 
+              ease: "power2.out" 
+            }, 0)
+            .to(cardOverlay, { 
+              opacity: 1, 
+              duration: 0.3, 
+              ease: "power2.out" 
+            }, 0)
+
+          // Animate optional elements if they exist
+          if (cardTitle) {
+            hoverTl.to(cardTitle, { 
+              y: -4, 
+              duration: 0.3, 
+              ease: "power2.out" 
+            }, 0.1)
+          }
+          
+          if (cardMeta) {
+            hoverTl.to(cardMeta, { 
+              opacity: 0.8, 
+              y: -2,
+              duration: 0.3, 
+              ease: "power2.out" 
+            }, 0.1)
+          }
+          
+          if (cardTech) {
+            hoverTl.to(cardTech, { 
+              y: -3,
+              duration: 0.3, 
+              ease: "power2.out" 
+            }, 0.1)
+          }
+          
+          if (cardButton) {
+            hoverTl.to(cardButton, { 
+              y: -2,
+              scale: 1.02,
+              duration: 0.3, 
+              ease: "power2.out" 
+            }, 0.2)
+          }
+
+          // Mouse event handlers
+          const handleMouseEnter = () => {
+            if (hoverTl && typeof hoverTl.play === 'function') {
+              hoverTl.play()
+            }
+          }
+
+          const handleMouseLeave = () => {
+            if (hoverTl && typeof hoverTl.reverse === 'function') {
+              hoverTl.reverse()
+            }
+          }
+
+          // Add event listeners and track them for cleanup
+          card.addEventListener('mouseenter', handleMouseEnter)
+          card.addEventListener('mouseleave', handleMouseLeave)
+          
+          eventListeners.push(
+            { element: card, type: 'mouseenter', handler: handleMouseEnter },
+            { element: card, type: 'mouseleave', handler: handleMouseLeave }
+          )
+        } catch (error) {
+          console.warn('Failed to create hover animation for card:', error)
+        }
+      }
+      })
+    }, 100) // Small delay to ensure DOM is fully ready
+
+    // Animate section title
+    const title = containerRef.current.querySelector('.section-title')
+    const subtitle = containerRef.current.querySelector('.section-subtitle')
+    
+    if (title && subtitle) {
+      gsap.fromTo([title, subtitle], 
+        { 
+          opacity: 0, 
+          y: 30 
+        },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: title,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          }
+        }
+      )
+    }
+
+    // Cleanup function
     return () => {
-      mm.revert()
+      // Kill all ScrollTriggers
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      
+      // Kill all timelines
+      timelines.forEach(timeline => {
+        if (timeline && typeof timeline.kill === 'function') {
+          timeline.kill()
+        }
+      })
+      
+      // Remove all event listeners
+      eventListeners.forEach(({ element, type, handler }) => {
+        if (element && element.removeEventListener) {
+          element.removeEventListener(type, handler)
+        }
+      })
     }
   }, [])
 
   return (
-    <section id="works" className="py-32 bg-gradient-to-br from-background via-background to-secondary/10" ref={containerRef}>
+    <section id="works" className="py-32 bg-background" ref={containerRef}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="gsap-fade-in mb-16 text-center">
-          <h2 className="text-6xl md:text-8xl font-black text-foreground mb-6 tracking-tight">PROJETS</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Quelques réalisations tech qui me passionnent :
+        <div className="mb-20 text-center">
+          <h2 className="section-title text-5xl md:text-7xl font-bold text-foreground mb-4 tracking-tight">
+            Projets Sélectionnés
+          </h2>
+          <p className="section-subtitle text-xl text-muted-foreground max-w-2xl mx-auto">
+            Une collection de mes meilleures réalisations techniques
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div 
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {projects && projects.length > 0 ? projects.map((project, index) => (
+            <article 
               key={index} 
-              className="work-card group cursor-pointer will-change-transform"
+              className="project-card group cursor-pointer"
               onClick={() => handleProjectClick(project)}
             >
-              <div className="w-full bg-card/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-primary/20 hover:border-primary/40 transition-all duration-500 shadow-xl hover:shadow-2xl hover:scale-105 relative">
-                {/* Click indicator */}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
+              <div className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:border-gray-200 dark:hover:border-gray-700">
+                {/* Project Image */}
+                <div className="relative overflow-hidden bg-gray-50 dark:bg-gray-800">
+                  <div className="aspect-[4/3]">
+                    <img
+                      src={
+                        project.image ||
+                        `/placeholder.svg?height=300&width=400&query=${encodeURIComponent(project.title)}`
+                      }
+                      alt={project.title}
+                      className="card-image w-full h-full object-cover"
+                    />
+                    <div className="card-overlay absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300"></div>
+                  </div>
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="inline-block px-3 py-1 text-xs font-medium text-white bg-black/70 backdrop-blur-sm rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  {/* View Project Indicator */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-                {/* Project Screenshot */}
-                <div className="aspect-[16/10] overflow-hidden bg-muted relative">
-                  <img
-                    src={
-                      project.image ||
-                      `/placeholder.svg?height=300&width=500&query=${encodeURIComponent(project.title)}`
-                    }
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
-                  
-                  {/* Overlay Content */}
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs text-primary font-bold tracking-widest uppercase px-2 py-1 bg-primary/20 rounded-md">
-                        {project.category}
-                      </span>
-                      <span className="text-xs text-muted-foreground font-medium">
-                        {project.year}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-1">
+
+                {/* Card Content */}
+                <div className="card-content p-6 space-y-4">
+                  {/* Project Title & Meta */}
+                  <div className="space-y-2">
+                    <h3 className="card-title text-xl font-semibold text-gray-900 dark:text-white leading-tight transition-colors duration-300 group-hover:text-primary">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {project.company}
-                    </p>
+                    <div className="card-meta flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span>{project.company}</span>
+                      <span>•</span>
+                      <span>{project.year}</span>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Project Info */}
-                <div className="p-6 space-y-4">
+
                   {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
                     {project.description}
                   </p>
-                  
+
                   {/* Technologies */}
-                  <div>
-                    <h4 className="text-xs font-semibold text-primary mb-2 uppercase tracking-wider">
-                      Technologies
-                    </h4>
-                    <div className="flex flex-wrap gap-1">
-                      {project.tech.slice(0, 4).map((tech) => (
+                  <div className="card-tech">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech && project.tech.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-md border border-primary/20"
+                          className="inline-block px-2.5 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-md"
                         >
                           {tech}
                         </span>
                       ))}
-                      {project.tech.length > 4 && (
-                        <span className="text-xs text-muted-foreground px-2 py-1">
-                          +{project.tech.length - 4}
+                      {project.tech && project.tech.length > 3 && (
+                        <span className="inline-block px-2.5 py-1 text-xs text-gray-500 dark:text-gray-400">
+                          +{project.tech.length - 3}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  {/* Key Achievement */}
-                  {project.achievements && project.achievements[0] && (
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-xs text-green-600 font-medium">
-                        {project.achievements[0]}
-                      </span>
+                  {/* Action Button */}
+                  <div className="card-button pt-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        {project.achievements && project.achievements[0] && (
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span className="text-xs text-green-600 dark:text-green-400 font-medium">
+                              {project.achievements[0]}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <button className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200">
+                        Voir plus →
+                      </button>
                     </div>
-                  )}
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3 pt-2">
-                    {project.codeActive ? (
-                      <button 
-                        onClick={(e) => handleCodeClick(project, e)}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-medium hover:bg-primary/20 transition-all duration-300 group/btn"
-                      >
-                        <svg className="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                        </svg>
-                        <span className="text-sm">Code</span>
-                      </button>
-                    ) : (
-                      <button 
-                        disabled
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 rounded-lg font-medium cursor-not-allowed opacity-60"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                        </svg>
-                        <span className="text-sm">Code (Inactif)</span>
-                      </button>
-                    )}
-                    <button 
-                      onClick={(e) => handleDetailsClick(project, e)}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 border border-primary/30 text-foreground rounded-lg font-medium hover:bg-primary/10 transition-all duration-300 group/btn"
-                    >
-                      <svg className="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <span className="text-sm">Détails</span>
-                    </button>
                   </div>
                 </div>
               </div>
+            </article>
+          )) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">Aucun projet à afficher pour le moment.</p>
             </div>
-          ))}
-        </div>
-
-        {/* View More Button */}
-        <div className="mt-16 text-center">
-          <button className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-xl font-medium hover:scale-105 hover:shadow-lg transition-all duration-300">
-            <span>Voir tous les projets</span>
-            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </button>
+          )}
         </div>
       </div>
 
@@ -375,11 +426,10 @@ export function WorksSection() {
             className="absolute inset-0 bg-background/80 backdrop-blur-sm"
             onClick={closeModal}
           ></div>
-          
           {/* Modal Content */}
           <div 
             ref={modalRef}
-            className="relative w-full max-w-4xl max-h-[90vh] bg-card rounded-2xl border border-primary/20 shadow-2xl overflow-hidden"
+            className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden"
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-primary/10">
@@ -432,7 +482,7 @@ export function WorksSection() {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-3">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedProject.tech.map((tech: string, index: number) => (
+                  {selectedProject.tech && selectedProject.tech.map((tech: string, index: number) => (
                     <span
                       key={index}
                       className="px-3 py-1 bg-primary/10 text-primary rounded-lg text-sm font-medium border border-primary/20"
@@ -444,7 +494,7 @@ export function WorksSection() {
               </div>
 
               {/* Features */}
-              {selectedProject.features && (
+              {selectedProject.features && selectedProject.features.length > 0 && (
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-3">Fonctionnalités</h3>
                   <div className="grid grid-cols-2 gap-2">
@@ -459,7 +509,7 @@ export function WorksSection() {
               )}
 
               {/* Achievements */}
-              {selectedProject.achievements && (
+              {selectedProject.achievements && selectedProject.achievements.length > 0 && (
                 <div>
                   <h3 className="text-lg font-semibold text-foreground mb-3">Réalisations</h3>
                   <div className="flex flex-wrap gap-2">
