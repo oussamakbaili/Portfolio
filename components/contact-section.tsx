@@ -149,51 +149,61 @@ export function ContactSection() {
   ]
 
   return (
-    <section ref={sectionRef} id="contact" className="py-32 bg-gradient-to-br from-background via-secondary/10 to-background relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-64 h-64 bg-primary/8 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-primary/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-2xl animate-pulse delay-500"></div>
+        
+        {/* Geometric shapes */}
+        <div className="absolute top-32 left-32 w-4 h-4 bg-primary/20 rotate-45 animate-pulse delay-700"></div>
+        <div className="absolute bottom-32 right-32 w-6 h-6 bg-primary/30 rounded-full animate-pulse delay-300"></div>
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-primary/25 rotate-12 animate-pulse delay-500"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16 sm:mb-24">
           <div className="gsap-fade-in">
-            <h2 className="text-6xl md:text-8xl font-black text-primary leading-tight mb-6">
-              LET'S WORK
-              <span className="block text-gradient">TOGETHER</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              Let's Connect
+            </div>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-6 sm:mb-8">
+              <span className="text-primary">LET'S WORK</span>
+              <span className="block text-slate-900 dark:text-white">TOGETHER</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed font-light px-4">
               Ready to bring your ideas to life? Let's discuss your project and create something amazing together.
             </p>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start">
           {/* Left - Contact Info */}
-          <div ref={contactInfoRef} className="space-y-12">
+          <div ref={contactInfoRef} className="space-y-12 sm:space-y-16">
             <div className="gsap-slide-left">
-              <h3 className="text-3xl font-bold text-primary mb-6">GET IN TOUCH</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-8">Get In Touch</h3>
+              <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                 I'm always interested in hearing about new projects and opportunities. 
                 Whether you have a question or just want to say hi, I'll try my best to get back to you!
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 sm:space-y-8">
               {contactInfo.map((info, index) => {
                 const Icon = info.icon
                 return (
                   <div key={index} className="contact-item group">
-                    <div className="flex items-start gap-4 p-6 bg-card/30 rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:shadow-lg">
-                      <div className={`w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300`}>
-                        <Icon className={`w-6 h-6 ${info.color}`} />
+                    <div className="flex items-start gap-4 sm:gap-6 p-6 sm:p-8 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-2xl sm:rounded-3xl border border-slate-200/50 dark:border-slate-700/50 hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+                      <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-500 group-hover:scale-110`}>
+                        <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${info.color}`} />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-lg font-bold text-foreground mb-1">{info.title}</h4>
-                        <p className="text-primary font-medium mb-1">{info.value}</p>
-                        <p className="text-sm text-muted-foreground">{info.description}</p>
+                        <h4 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1 sm:mb-2">{info.title}</h4>
+                        <p className="text-primary font-semibold text-base sm:text-lg mb-1 sm:mb-2">{info.value}</p>
+                        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">{info.description}</p>
                       </div>
                     </div>
                   </div>
@@ -203,8 +213,8 @@ export function ContactSection() {
 
             {/* Social Links */}
             <div className="gsap-fade-in">
-              <h4 className="text-lg font-bold text-foreground mb-4">Follow Me</h4>
-              <div className="flex gap-4">
+              <h4 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">Follow Me</h4>
+              <div className="flex gap-4 sm:gap-6">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon
                   return (
@@ -213,9 +223,9 @@ export function ContactSection() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center hover:bg-primary/20 transition-all duration-300 hover:scale-110 ${social.color}`}
+                      className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 rounded-xl sm:rounded-2xl flex items-center justify-center hover:from-primary/10 hover:to-primary/5 dark:hover:from-primary/20 dark:hover:to-primary/10 transition-all duration-500 hover:scale-110 hover:shadow-lg ${social.color}`}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </a>
                   )
                 })}
@@ -225,37 +235,40 @@ export function ContactSection() {
 
           {/* Right - Contact Form */}
           <div className="gsap-slide-right">
-            <div className="bg-card/50 rounded-3xl p-8 border border-primary/10">
-              <h3 className="text-2xl font-bold text-primary mb-6">Send a Message</h3>
+            <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-slate-200/50 dark:border-slate-700/50 shadow-2xl shadow-primary/5">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3">Send a Message</h3>
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">Fill out the form below and I'll get back to you as soon as possible.</p>
+              </div>
               
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium text-foreground mb-2 block">First Name *</label>
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">First Name *</label>
                     <Input 
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder="Your first name" 
                       required
-                      className="bg-background/50 border-primary/20 focus:border-primary"
+                      className="h-12 bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 focus:border-primary focus:ring-primary/20 rounded-xl transition-all duration-300"
                     />
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-foreground mb-2 block">Last Name *</label>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Last Name *</label>
                     <Input 
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
                       placeholder="Your last name" 
                       required
-                      className="bg-background/50 border-primary/20 focus:border-primary"
+                      className="h-12 bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 focus:border-primary focus:ring-primary/20 rounded-xl transition-all duration-300"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Email *</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email *</label>
                   <Input 
                     name="email"
                     type="email"
@@ -263,41 +276,41 @@ export function ContactSection() {
                     onChange={handleInputChange}
                     placeholder="your.email@example.com" 
                     required
-                    className="bg-background/50 border-primary/20 focus:border-primary"
+                    className="h-12 bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 focus:border-primary focus:ring-primary/20 rounded-xl transition-all duration-300"
                   />
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Company</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Company</label>
                   <Input 
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
                     placeholder="Your company name" 
-                    className="bg-background/50 border-primary/20 focus:border-primary"
+                    className="h-12 bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 focus:border-primary focus:ring-primary/20 rounded-xl transition-all duration-300"
                   />
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Subject *</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Subject *</label>
                   <Input 
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
                     placeholder="What's this about?" 
                     required
-                    className="bg-background/50 border-primary/20 focus:border-primary"
+                    className="h-12 bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 focus:border-primary focus:ring-primary/20 rounded-xl transition-all duration-300"
                   />
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">Message *</label>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Message *</label>
                   <Textarea 
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Tell me about your project, goals, and how I can help..." 
-                    className="min-h-32 bg-background/50 border-primary/20 focus:border-primary"
+                    className="min-h-36 bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 focus:border-primary focus:ring-primary/20 rounded-xl transition-all duration-300 resize-none"
                     required
                   />
                 </div>
@@ -305,16 +318,16 @@ export function ContactSection() {
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-14 bg-gradient-to-r from-primary to-primary/90 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {isSubmitting ? (
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin"></div>
-                      <span>Sending...</span>
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <span>Sending Message...</span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2">
-                      <Send className="w-4 h-4" />
+                    <div className="flex items-center gap-3">
+                      <Send className="w-5 h-5" />
                       <span>Send Message</span>
                     </div>
                   )}
@@ -322,16 +335,16 @@ export function ContactSection() {
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
-                  <div className="flex items-center gap-2 text-green-400 bg-green-400/10 p-3 rounded-lg">
+                  <div className="flex items-center gap-3 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-200 dark:border-green-800">
                     <CheckCircle className="w-5 h-5" />
-                    <span className="text-sm">Message sent successfully! I'll get back to you soon.</span>
+                    <span className="font-medium">Message sent successfully! I'll get back to you soon.</span>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="flex items-center gap-2 text-red-400 bg-red-400/10 p-3 rounded-lg">
+                  <div className="flex items-center gap-3 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-4 rounded-xl border border-red-200 dark:border-red-800">
                     <AlertCircle className="w-5 h-5" />
-                    <span className="text-sm">Something went wrong. Please try again.</span>
+                    <span className="font-medium">Something went wrong. Please try again.</span>
                   </div>
                 )}
               </form>
@@ -340,15 +353,15 @@ export function ContactSection() {
         </div>
 
         {/* Footer */}
-        <div className="gsap-fade-in mt-20 pt-8 border-t border-primary/20">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-              <p className="text-sm text-muted-foreground">
+        <div className="gsap-fade-in mt-24 pt-12 border-t border-slate-200/50 dark:border-slate-700/50">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <div className="flex items-center gap-3">
+              <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+              <p className="text-slate-600 dark:text-slate-400">
                 © 2024 <span className="text-primary font-bold">Oussama Kbaili</span>. All rights reserved.
               </p>
             </div>
-            <div className="flex space-x-6 text-sm text-muted-foreground">
+            <div className="flex space-x-8">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon
                 return (
@@ -357,7 +370,7 @@ export function ContactSection() {
                     href={social.href} 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`hover:text-primary transition-colors duration-300 ${social.color}`}
+                    className={`w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center hover:bg-primary/10 dark:hover:bg-primary/20 transition-all duration-300 hover:scale-110 ${social.color}`}
                   >
                     <Icon className="w-5 h-5" />
                   </a>

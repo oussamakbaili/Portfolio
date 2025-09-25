@@ -130,7 +130,7 @@ export function WorksSection() {
     const eventListeners: Array<{ element: HTMLElement; type: string; handler: () => void }> = []
     
     // Set initial state for all cards
-    gsap.set(cards, {
+      gsap.set(cards, {
       opacity: 0,
       y: 60,
       scale: 0.95,
@@ -138,7 +138,7 @@ export function WorksSection() {
 
     // Animate cards on scroll with stagger
     const cardTl = gsap.timeline({
-      scrollTrigger: {
+        scrollTrigger: {
         trigger: containerRef.current,
         start: "top 70%",
         toggleActions: "play none none reverse",
@@ -259,20 +259,20 @@ export function WorksSection() {
     
     if (title && subtitle) {
       gsap.fromTo([title, subtitle], 
-        { 
-          opacity: 0, 
+          {
+            opacity: 0,
           y: 30 
-        },
-        { 
-          opacity: 1, 
-          y: 0, 
+          },
+          {
+            opacity: 1,
+            y: 0,
           duration: 1,
           ease: "power3.out",
           stagger: 0.2,
-          scrollTrigger: {
+            scrollTrigger: {
             trigger: title,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+              start: "top 80%",
+              toggleActions: "play none none reverse",
           }
         }
       )
@@ -300,51 +300,51 @@ export function WorksSection() {
   }, [])
 
   return (
-    <section id="works" className="py-32 bg-background" ref={containerRef}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-20 text-center">
-          <h2 className="section-title text-5xl md:text-7xl font-bold text-foreground mb-4 tracking-tight">
+    <section id="works" className="py-16 sm:py-32 bg-background" ref={containerRef}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="mb-12 sm:mb-20 text-center">
+          <h2 className="section-title text-3xl sm:text-5xl md:text-7xl font-bold text-primary mb-3 sm:mb-4 tracking-tight">
             Projets Sélectionnés
           </h2>
-          <p className="section-subtitle text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="section-subtitle text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Une collection de mes meilleures réalisations techniques
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
           {projects && projects.length > 0 ? projects.map((project, index) => (
             <article 
               key={index} 
               className="project-card group cursor-pointer"
               onClick={() => handleProjectClick(project)}
             >
-              <div className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:border-gray-200 dark:hover:border-gray-700">
+              <div className="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:border-gray-200 dark:hover:border-gray-700">
                 {/* Project Image */}
                 <div className="relative overflow-hidden bg-gray-50 dark:bg-gray-800">
                   <div className="aspect-[4/3]">
-                    <img
-                      src={
-                        project.image ||
+                  <img
+                    src={
+                      project.image ||
                         `/placeholder.svg?height=300&width=400&query=${encodeURIComponent(project.title)}`
-                      }
-                      alt={project.title}
+                    }
+                    alt={project.title}
                       className="card-image w-full h-full object-cover"
                     />
                     <div className="card-overlay absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300"></div>
                   </div>
                   
                   {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="inline-block px-3 py-1 text-xs font-medium text-white bg-black/70 backdrop-blur-sm rounded-full">
-                      {project.category}
-                    </span>
+                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
+                    <span className="inline-block px-2 sm:px-3 py-1 text-xs font-medium text-white bg-black/70 backdrop-blur-sm rounded-full">
+                        {project.category}
+                      </span>
                   </div>
 
                   {/* View Project Indicator */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </div>
@@ -352,37 +352,37 @@ export function WorksSection() {
                 </div>
 
                 {/* Card Content */}
-                <div className="card-content p-6 space-y-4">
+                <div className="card-content p-4 sm:p-6 space-y-3 sm:space-y-4">
                   {/* Project Title & Meta */}
-                  <div className="space-y-2">
-                    <h3 className="card-title text-xl font-semibold text-gray-900 dark:text-white leading-tight transition-colors duration-300 group-hover:text-primary">
+                  <div className="space-y-1 sm:space-y-2">
+                    <h3 className="card-title text-lg sm:text-xl font-semibold text-gray-900 dark:text-white leading-tight transition-colors duration-300 group-hover:text-primary">
                       {project.title}
                     </h3>
-                    <div className="card-meta flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="card-meta flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                       <span>{project.company}</span>
                       <span>•</span>
                       <span>{project.year}</span>
                     </div>
-                  </div>
-
+                </div>
+                
                   {/* Description */}
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-2">
                     {project.description}
                   </p>
-
+                  
                   {/* Technologies */}
                   <div className="card-tech">
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
                       {project.tech && project.tech.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="inline-block px-2.5 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-md"
+                          className="inline-block px-2 sm:px-2.5 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-md"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.tech && project.tech.length > 3 && (
-                        <span className="inline-block px-2.5 py-1 text-xs text-gray-500 dark:text-gray-400">
+                        <span className="inline-block px-2 sm:px-2.5 py-1 text-xs text-gray-500 dark:text-gray-400">
                           +{project.tech.length - 3}
                         </span>
                       )}
@@ -393,18 +393,18 @@ export function WorksSection() {
                   <div className="card-button pt-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        {project.achievements && project.achievements[0] && (
+                  {project.achievements && project.achievements[0] && (
                           <div className="flex items-center gap-1.5">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                             <span className="text-xs text-green-600 dark:text-green-400 font-medium">
-                              {project.achievements[0]}
-                            </span>
-                          </div>
-                        )}
+                        {project.achievements[0]}
+                      </span>
+                    </div>
+                  )}
                       </div>
                       <button className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200">
                         Voir plus →
-                      </button>
+                    </button>
                     </div>
                   </div>
                 </div>
@@ -530,13 +530,13 @@ export function WorksSection() {
             <div className="flex items-center justify-between p-6 border-t border-primary/10 bg-muted/30">
               <div className="flex gap-3">
                 {selectedProject.codeActive ? (
-                  <button
-                    onClick={() => window.open(selectedProject.githubUrl, '_blank')}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-medium hover:bg-primary/20 transition-colors duration-200"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>Code Source</span>
-                  </button>
+                <button
+                  onClick={() => window.open(selectedProject.githubUrl, '_blank')}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg font-medium hover:bg-primary/20 transition-colors duration-200"
+                >
+                  <Github className="w-4 h-4" />
+                  <span>Code Source</span>
+                </button>
                 ) : (
                   <button
                     disabled

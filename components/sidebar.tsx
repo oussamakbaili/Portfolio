@@ -20,6 +20,7 @@ import {
 
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const sidebarRef = useRef<HTMLDivElement>(null)
   const textElementsRef = useRef<(HTMLElement | null)[]>([])
@@ -225,10 +226,7 @@ export function Sidebar() {
           
           <div ref={headerTextRef} className="ml-4 overflow-hidden">
             <h1 className="text-lg font-bold text-foreground whitespace-nowrap">Oussama.dev</h1>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
-              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="whitespace-nowrap">Disponible</span>
-            </div>
+            <p className="text-sm text-primary font-medium whitespace-nowrap">Software Engineer</p>
           </div>
         </div>
 

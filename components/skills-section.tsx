@@ -198,101 +198,52 @@ export function SkillsSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Professional Header */}
-        <div className="text-center py-16 lg:py-24">
+        <div className="text-center py-12 sm:py-16 lg:py-24">
           <div className="gsap-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-6">
-              <Award className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <Award className="w-3 h-3 sm:w-4 sm:h-4" />
               Professional Expertise
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-4 sm:mb-6">
               Skills & 
-              <span className="block bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="block text-primary">
                 Expertise
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed font-light px-4">
               A comprehensive overview of my technical capabilities, professional experience, 
               and the cutting-edge technologies I leverage to deliver exceptional solutions.
             </p>
           </div>
         </div>
 
-        {/* Core Competencies Section */}
-        <div className="mb-20">
-          <div className="text-center mb-16">
-            <div className="gsap-slide-up">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-                Core Competencies
-              </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-                My strongest technical skills, continuously refined through years of hands-on experience 
-                and constant learning in the ever-evolving world of technology.
-              </p>
-            </div>
-          </div>
-
-          <div ref={skillsRef} className="grid md:grid-cols-2 gap-8">
-            {skills.map((skill, index) => {
-              const Icon = skill.icon
-              return (
-                <div key={index} className="gsap-fade-in group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className={`w-12 h-12 ${skill.color.replace('text-', 'bg-').replace('-500', '-100')} dark:${skill.color.replace('text-', 'bg-').replace('-500', '-900')} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className={`w-6 h-6 ${skill.color}`} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{skill.name}</h3>
-                        <span className="text-sm font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">
-                          {skill.category}
-                        </span>
-                      </div>
-                      <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">{skill.description}</p>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Proficiency</span>
-                        <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
-                        <div
-                          className="progress-bar bg-gradient-to-r from-emerald-500 to-blue-500 h-2 rounded-full transition-all duration-1000 ease-out"
-                          data-width={skill.level}
-                          style={{ width: 0 }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
 
         {/* Technology Stack Section */}
-        <div className="mb-20">
-          <div className="text-center mb-16">
+        <div className="mb-16 sm:mb-20">
+          <div className="text-center mb-12 sm:mb-16">
             <div className="gsap-slide-up">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                 Technology Stack
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4">
                 A comprehensive collection of tools and technologies I use to build modern, 
                 scalable, and performant applications across the full development stack.
               </p>
             </div>
           </div>
 
-          <div ref={toolsRef} className="grid md:grid-cols-2 gap-8">
+          <div ref={toolsRef} className="grid sm:grid-cols-2 gap-6 sm:gap-8">
             {toolCategories.map((category, categoryIndex) => {
               const CategoryIcon = category.icon
               return (
-                <div key={categoryIndex} className="tool-card bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={`w-12 h-12 ${category.color.replace('text-', 'bg-').replace('-500', '-100')} dark:${category.color.replace('text-', 'bg-').replace('-500', '-900')} rounded-xl flex items-center justify-center`}>
-                      <CategoryIcon className={`w-6 h-6 ${category.color}`} />
+                <div key={categoryIndex} className="tool-card bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 ${category.color.replace('text-', 'bg-').replace('-500', '-100')} dark:${category.color.replace('text-', 'bg-').replace('-500', '-900')} rounded-xl flex items-center justify-center`}>
+                      <CategoryIcon className={`w-5 h-5 sm:w-6 sm:h-6 ${category.color}`} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{category.title}</h3>
-                      <p className="text-sm text-slate-600 dark:text-slate-300">{category.description}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">{category.title}</h3>
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">{category.description}</p>
                     </div>
                   </div>
                   
@@ -434,37 +385,37 @@ export function SkillsSection() {
         </div>
 
         {/* Professional Stats */}
-        <div className="mb-20">
+        <div className="mb-16 sm:mb-20">
           <div className="gsap-fade-in">
-            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-3xl p-8 lg:p-12 border border-emerald-200 dark:border-emerald-800">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-emerald-200 dark:border-emerald-800">
+              <div className="text-center mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                   Professional Impact
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300">
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 px-4">
                   Measurable results and achievements throughout my career
                 </p>
               </div>
-              <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
                 <div className="group">
-                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                    5+
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+                    3+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300 font-medium">Years Experience</div>
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium">Years Experience</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Full-stack development</div>
                 </div>
                 <div className="group">
-                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                    50+
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+                    15+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300 font-medium">Projects Delivered</div>
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium">Projects Delivered</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">From concept to production</div>
                 </div>
                 <div className="group">
-                  <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                    100%
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+                    95%
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300 font-medium">Client Satisfaction</div>
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium">Client Satisfaction</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Consistent quality delivery</div>
                 </div>
               </div>
@@ -473,27 +424,27 @@ export function SkillsSection() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center py-16">
+        <div className="text-center py-12 sm:py-16">
           <div className="gsap-fade-in">
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               Ready to Work Together?
             </h3>
-            <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
               Let's discuss how my skills and expertise can help bring your next project to life.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
               <a 
                 href="/works"
-                className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 text-white rounded-xl font-semibold hover:from-emerald-700 hover:to-blue-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center justify-center"
+                className="px-6 sm:px-8 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 text-white rounded-xl font-semibold hover:from-emerald-700 hover:to-blue-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center justify-center text-sm sm:text-base"
               >
-                <CheckCircle className="w-5 h-5 inline mr-2" />
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" />
                 View My Work
               </a>
               <a 
                 href="/contact"
-                className="px-8 py-3 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl font-semibold hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center"
+                className="px-6 sm:px-8 py-3 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-xl font-semibold hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base"
               >
-                <TrendingUp className="w-5 h-5 inline mr-2" />
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" />
                 Get In Touch
               </a>
             </div>

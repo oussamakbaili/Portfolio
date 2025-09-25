@@ -122,22 +122,22 @@ export function AboutSection() {
 
 
   return (
-    <section ref={sectionRef} id="about" className="py-32 bg-background relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-32 bg-background relative overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left - MY STORY */}
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             <div className="gsap-slide-left">
-              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8">MY STORY</h2>
-              <div className="space-y-6">
-                <p className="text-muted-foreground leading-relaxed">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6 sm:mb-8">MY STORY</h2>
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   Ingénieur d'État en Informatique spécialisé en développement full-stack, je consacre mon expertise 
                   à concevoir des solutions technologiques innovantes. Avec plus de 3 ans d'expérience pratique, 
                   j'ai eu le privilège de travailler avec des startups et des entreprises établies pour construire 
                   des applications web évolutives et performantes.
                 </p>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   Mon parcours a commencé par une fascination pour la façon dont les choses fonctionnent sur le web, 
                   et cela a évolué vers une passion pour créer des solutions numériques qui ont un impact réel. 
                   Je me spécialise dans Laravel, Django, React, et les technologies web modernes, avec un focus 
@@ -147,30 +147,75 @@ export function AboutSection() {
             </div>
 
             {/* Stats */}
-            <div ref={statsRef} className="grid grid-cols-2 gap-6">
+            <div ref={statsRef} className="grid grid-cols-2 gap-4 sm:gap-6">
               {stats.map((stat, index) => (
-                <div key={index} className="gsap-fade-in text-center p-6 bg-card/50 rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:scale-105">
-                  <div className="text-3xl font-black text-primary mb-2">
+                <div key={index} className="gsap-fade-in text-center p-4 sm:p-6 bg-card/50 rounded-xl sm:rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:scale-105">
+                  <div className="text-2xl sm:text-3xl font-black text-primary mb-2">
                     <span className="stat-number" data-end={stat.number}>0</span>
                     <span>{stat.suffix}</span>
                   </div>
-                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group flex items-center justify-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-xl font-medium hover:scale-105 hover:shadow-lg transition-all duration-300">
-                <Download className="w-5 h-5" />
-                <span>TÉLÉCHARGER MON CV</span>
-                <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-              <button className="flex items-center justify-center gap-3 px-8 py-4 border-2 border-primary text-primary rounded-xl font-medium hover:bg-primary hover:text-primary-foreground hover:scale-105 transition-all duration-300">
-                <Code className="w-5 h-5" />
-                <span>VOIR MON CODE</span>
-              </button>
+            {/* CV Section */}
+            <div className="mt-8 sm:mt-12">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4 sm:mb-6">Mon CV</h2>
+              <div className="bg-card/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-primary/10 hover:border-primary/20 transition-all duration-300">
+                <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6">
+                  {/* CV Info */}
+                  <div className="flex-1 w-full">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                        <Download className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="text-base sm:text-lg font-bold text-foreground">CV - Oussama Kbaili</h4>
+                        <p className="text-xs sm:text-sm text-muted-foreground">Software Engineer</p>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-primary rounded-full"></div>
+                        <span>Expérience Full-Stack</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-primary rounded-full"></div>
+                        <span>Technologies Modernes</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-primary rounded-full"></div>
+                        <span>Projets Innovants</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Download Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
+                    <a
+                      href="/cv/cv-oussama-kbaili.pdf"
+                      download="CV-Oussama-Kbaili.pdf"
+                      className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors duration-200 text-sm"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>Télécharger PDF</span>
+                    </a>
+                    
+                    <a
+                      href="/cv/cv-oussama-kbaili.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 border border-primary text-primary rounded-xl font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200 text-sm"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Voir en ligne</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
 
           {/* Right - CAREER TIMELINE */}
@@ -247,6 +292,7 @@ export function AboutSection() {
             </div>
           </div>
         </div>
+
 
       </div>
     </section>
