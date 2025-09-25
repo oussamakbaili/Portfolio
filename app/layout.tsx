@@ -5,6 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  // Updated title for Vercel deployment
   title: 'Oussama Kbaili - Software Engineer | Portfolio',
   description: 'Portfolio professionnel d\'Oussama Kbaili, Ingénieur Logiciel spécialisé en développement Full-Stack. Découvrez mes projets, compétences et expérience en React, Next.js, Laravel, et plus encore.',
   keywords: 'Oussama Kbaili, Software Engineer, Full-Stack Developer, React, Next.js, Laravel, Portfolio, Développeur, Casablanca, Maroc',
