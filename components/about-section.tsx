@@ -17,6 +17,52 @@ export function AboutSection() {
   useEffect(() => {
     if (!sectionRef.current || !statsRef.current || !timelineRef.current) return
 
+    // Left section (My Story) animation
+    const leftElements = sectionRef.current.querySelectorAll('.gsap-slide-left')
+    gsap.fromTo(leftElements, 
+      { 
+        opacity: 0, 
+        x: -50,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    )
+
+    // Stats animation
+    const statsElements = sectionRef.current.querySelectorAll('.gsap-fade-in')
+    gsap.fromTo(statsElements, 
+      { 
+        opacity: 0, 
+        y: 30,
+        scale: 0.9
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    )
+
     // Stats counter animation
     const stats = statsRef.current.querySelectorAll('.stat-number')
     stats.forEach((stat) => {
@@ -59,6 +105,30 @@ export function AboutSection() {
         }
       }
     )
+
+    // Right section (Career Timeline) animation
+    const rightSection = sectionRef.current.querySelector('.space-y-8')
+    if (rightSection) {
+      gsap.fromTo(rightSection, 
+        { 
+          opacity: 0, 
+          x: 50,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: rightSection,
+            start: "top 70%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+    }
 
   }, [])
 
@@ -128,7 +198,7 @@ export function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left - MY STORY */}
           <div className="space-y-8 sm:space-y-12">
-            <div className="gsap-slide-left">
+            <div className="gsap-slide-left opacity-100">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-6 sm:mb-8">MY STORY</h2>
               <div className="space-y-4 sm:space-y-6">
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -149,7 +219,7 @@ export function AboutSection() {
             {/* Stats */}
             <div ref={statsRef} className="grid grid-cols-2 gap-4 sm:gap-6">
               {stats.map((stat, index) => (
-                <div key={index} className="gsap-fade-in text-center p-4 sm:p-6 bg-card/50 rounded-xl sm:rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:scale-105">
+                <div key={index} className="gsap-fade-in opacity-100 text-center p-4 sm:p-6 bg-card/50 rounded-xl sm:rounded-2xl border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:scale-105">
                   <div className="text-2xl sm:text-3xl font-black text-primary mb-2">
                     <span className="stat-number" data-end={stat.number}>0</span>
                     <span>{stat.suffix}</span>
@@ -219,14 +289,14 @@ export function AboutSection() {
           </div>
 
           {/* Right - CAREER TIMELINE */}
-          <div ref={timelineRef} className="space-y-8">
+          <div ref={timelineRef} className="space-y-8 opacity-100">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8">CAREER TIMELINE</h2>
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/60 to-primary/20"></div>
               
               {timeline.map((item, index) => (
-                <div key={index} className="timeline-item relative pl-20 pb-8">
+                <div key={index} className="timeline-item opacity-100 relative pl-20 pb-8">
                   {/* Timeline dot */}
                   <div className="absolute left-4 top-2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg"></div>
                   

@@ -303,10 +303,10 @@ export function WorksSection() {
     <section id="works" className="py-16 sm:py-32 bg-background" ref={containerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="mb-12 sm:mb-20 text-center">
-          <h2 className="section-title text-3xl sm:text-5xl md:text-7xl font-bold text-primary mb-3 sm:mb-4 tracking-tight">
+          <h2 className="section-title opacity-100 text-3xl sm:text-5xl md:text-7xl font-bold text-primary mb-3 sm:mb-4 tracking-tight">
             Projets Sélectionnés
           </h2>
-          <p className="section-subtitle text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="section-subtitle opacity-100 text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Une collection de mes meilleures réalisations techniques
           </p>
         </div>
@@ -316,7 +316,7 @@ export function WorksSection() {
           {projects && projects.length > 0 ? projects.map((project, index) => (
             <article 
               key={index} 
-              className="project-card group cursor-pointer"
+              className="project-card opacity-100 group cursor-pointer"
               onClick={() => handleProjectClick(project)}
             >
               <div className="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:border-gray-200 dark:hover:border-gray-700">

@@ -34,24 +34,51 @@ export function SkillsSection() {
   useEffect(() => {
     if (!sectionRef.current || !skillsRef.current || !toolsRef.current) return
 
-    // Skills progress bars animation
-    const progressBars = skillsRef.current.querySelectorAll('.progress-bar')
-    progressBars.forEach((bar) => {
-      const width = bar.getAttribute('data-width')
-      gsap.fromTo(bar, 
-        { width: 0 },
-        {
-          width: `${width}%`,
-          duration: 2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: bar,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
+    // Header animation
+    const headerElements = sectionRef.current.querySelectorAll('.gsap-fade-in')
+    gsap.fromTo(headerElements, 
+      { 
+        opacity: 0, 
+        y: 50,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: "power2.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse"
         }
-      )
-    })
+      }
+    )
+
+    // Technology Stack section animation
+    const slideUpElements = sectionRef.current.querySelectorAll('.gsap-slide-up')
+    gsap.fromTo(slideUpElements, 
+      { 
+        opacity: 0, 
+        y: 30,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: slideUpElements[0],
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    )
 
     // Tools cards animation
     const toolCards = toolsRef.current.querySelectorAll('.tool-card')
@@ -75,6 +102,25 @@ export function SkillsSection() {
         }
       }
     )
+
+    // Skills progress bars animation
+    const progressBars = skillsRef.current.querySelectorAll('.progress-bar')
+    progressBars.forEach((bar) => {
+      const width = bar.getAttribute('data-width')
+      gsap.fromTo(bar, 
+        { width: 0 },
+        {
+          width: `${width}%`,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: bar,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+    })
 
   }, [])
 
@@ -199,14 +245,14 @@ export function SkillsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Professional Header */}
         <div className="text-center py-12 sm:py-16 lg:py-24">
-          <div className="gsap-fade-in">
+          <div className="gsap-fade-in" style={{ opacity: 1 }}>
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
               <Award className="w-3 h-3 sm:w-4 sm:h-4" />
               Professional Expertise
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-4 sm:mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-4 sm:mb-6 relative z-10">
               Skills & 
-              <span className="block text-primary">
+              <span className="block" style={{ color: '#00745a' }}>
                 Expertise
               </span>
             </h1>
@@ -222,7 +268,7 @@ export function SkillsSection() {
         <div className="mb-16 sm:mb-20">
           <div className="text-center mb-12 sm:mb-16">
             <div className="gsap-slide-up">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4 relative z-10">
                 Technology Stack
               </h2>
               <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4">
@@ -236,7 +282,7 @@ export function SkillsSection() {
             {toolCategories.map((category, categoryIndex) => {
               const CategoryIcon = category.icon
               return (
-                <div key={categoryIndex} className="tool-card bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300">
+                <div key={categoryIndex} className="tool-card opacity-100 bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300">
                   <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                     <div className={`w-10 h-10 sm:w-12 sm:h-12 ${category.color.replace('text-', 'bg-').replace('-500', '-100')} dark:${category.color.replace('text-', 'bg-').replace('-500', '-900')} rounded-xl flex items-center justify-center`}>
                       <CategoryIcon className={`w-5 h-5 sm:w-6 sm:h-6 ${category.color}`} />
@@ -279,7 +325,7 @@ export function SkillsSection() {
         {/* Mobile Development Section */}
         <div className="mb-20">
           <div className="text-center mb-16">
-            <div className="gsap-slide-up">
+            <div className="gsap-slide-up opacity-100">
               <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
                 Mobile Development
               </h2>
@@ -386,7 +432,7 @@ export function SkillsSection() {
 
         {/* Professional Stats */}
         <div className="mb-16 sm:mb-20">
-          <div className="gsap-fade-in">
+          <div className="gsap-fade-in opacity-100">
             <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-emerald-200 dark:border-emerald-800">
               <div className="text-center mb-6 sm:mb-8">
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
@@ -425,7 +471,7 @@ export function SkillsSection() {
 
         {/* Call to Action */}
         <div className="text-center py-12 sm:py-16">
-          <div className="gsap-fade-in">
+          <div className="gsap-fade-in opacity-100">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               Ready to Work Together?
             </h3>

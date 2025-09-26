@@ -41,6 +41,29 @@ export function ContactSection() {
   useEffect(() => {
     if (!sectionRef.current || !formRef.current || !contactInfoRef.current) return
 
+    // Header animation
+    const headerElements = sectionRef.current.querySelectorAll('.gsap-fade-in')
+    gsap.fromTo(headerElements, 
+      { 
+        opacity: 0, 
+        y: 50,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    )
+
     // Contact info animation
     const contactItems = contactInfoRef.current.querySelectorAll('.contact-item')
     gsap.fromTo(contactItems, 
@@ -54,6 +77,53 @@ export function ContactSection() {
         x: 0,
         scale: 1,
         duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: contactInfoRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    )
+
+    // Form animation
+    const formElement = sectionRef.current.querySelector('.gsap-slide-right')
+    if (formElement) {
+      gsap.fromTo(formElement, 
+        { 
+          opacity: 0, 
+          x: 50,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: formElement,
+            start: "top 70%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      )
+    }
+
+    // Left section animation
+    const leftElements = sectionRef.current.querySelectorAll('.gsap-slide-left')
+    gsap.fromTo(leftElements, 
+      { 
+        opacity: 0, 
+        x: -50,
+        scale: 0.95
+      },
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 1,
         ease: "power2.out",
         stagger: 0.2,
         scrollTrigger: {
@@ -165,7 +235,7 @@ export function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
         {/* Header */}
         <div className="text-center mb-16 sm:mb-24">
-          <div className="gsap-fade-in">
+          <div className="gsap-fade-in opacity-100">
             <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
               Let's Connect
@@ -183,7 +253,7 @@ export function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-start">
           {/* Left - Contact Info */}
           <div ref={contactInfoRef} className="space-y-12 sm:space-y-16">
-            <div className="gsap-slide-left">
+            <div className="gsap-slide-left opacity-100">
               <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-8">Get In Touch</h3>
               <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                 I'm always interested in hearing about new projects and opportunities. 
@@ -212,7 +282,7 @@ export function ContactSection() {
             </div>
 
             {/* Social Links */}
-            <div className="gsap-fade-in">
+            <div className="gsap-fade-in opacity-100">
               <h4 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">Follow Me</h4>
               <div className="flex gap-4 sm:gap-6">
                 {socialLinks.map((social, index) => {
@@ -234,7 +304,7 @@ export function ContactSection() {
           </div>
 
           {/* Right - Contact Form */}
-          <div className="gsap-slide-right">
+          <div className="gsap-slide-right opacity-100">
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-slate-200/50 dark:border-slate-700/50 shadow-2xl shadow-primary/5">
               <div className="mb-6 sm:mb-8">
                 <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3">Send a Message</h3>
@@ -353,7 +423,7 @@ export function ContactSection() {
         </div>
 
         {/* Footer */}
-        <div className="gsap-fade-in mt-24 pt-12 border-t border-slate-200/50 dark:border-slate-700/50">
+        <div className="gsap-fade-in opacity-100 mt-24 pt-12 border-t border-slate-200/50 dark:border-slate-700/50">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
