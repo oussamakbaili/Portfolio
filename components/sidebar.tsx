@@ -15,19 +15,24 @@ import {
   MessageSquareIcon, 
   GithubIcon,
   LinkedinIcon,
-  MailIcon
+  MailIcon,
+  MenuIcon,
+  XIcon
 } from "@/components/icons"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const isMobile = useIsMobile()
   const sidebarRef = useRef<HTMLDivElement>(null)
   const textElementsRef = useRef<(HTMLElement | null)[]>([])
   const linksRef = useRef<HTMLDivElement>(null)
   const socialRef = useRef<HTMLDivElement>(null)
   const headerTextRef = useRef<HTMLDivElement>(null)
   const socialHeaderRef = useRef<HTMLDivElement>(null)
+  const mobileOverlayRef = useRef<HTMLDivElement>(null)
 
   const menuItems = [
     { 
@@ -94,36 +99,56 @@ export function Sidebar() {
   useEffect(() => {
     if (!sidebarRef.current) return
 
-    // Initial setup - sidebar starts collapsed on the left
-    gsap.set(sidebarRef.current, {
-      width: "80px",
-      opacity: 1
-    })
-
-    // Set initial state for text elements - hidden
-    if (headerTextRef.current) {
-      gsap.set(headerTextRef.current, { opacity: 0, x: -20 })
-    }
-    if (socialHeaderRef.current) {
-      gsap.set(socialHeaderRef.current, { opacity: 0, x: -20 })
-    }
-    
-    textElementsRef.current.forEach(el => {
-      if (el) {
-        gsap.set(el, { opacity: 0, x: -20 })
+    if (isMobile) {
+      // Mobile: sidebar starts completely hidden
+      gsap.set(sidebarRef.current, {
+        x: "-100%",
+        width: "280px",
+        opacity: 1,
+        display: "none"
+      })
+      // Mobile: text elements start visible (for when sidebar is open)
+      if (headerTextRef.current) {
+        gsap.set(headerTextRef.current, { opacity: 1, x: 0 })
       }
-    })
+      if (socialHeaderRef.current) {
+        gsap.set(socialHeaderRef.current, { opacity: 1, x: 0 })
+      }
+      textElementsRef.current.forEach(el => {
+        if (el) {
+          gsap.set(el, { opacity: 1, x: 0 })
+        }
+      })
+    } else {
+      // Desktop: sidebar starts collapsed on the left
+      gsap.set(sidebarRef.current, {
+        width: "80px",
+        opacity: 1
+      })
+      // Desktop: text elements start hidden
+      if (headerTextRef.current) {
+        gsap.set(headerTextRef.current, { opacity: 0, x: -20 })
+      }
+      if (socialHeaderRef.current) {
+        gsap.set(socialHeaderRef.current, { opacity: 0, x: -20 })
+      }
+      textElementsRef.current.forEach(el => {
+        if (el) {
+          gsap.set(el, { opacity: 0, x: -20 })
+        }
+      })
+      
+      // Desktop: entrance animation
+      gsap.fromTo(sidebarRef.current, 
+        { x: -80, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
+      )
+    }
 
-    // Entrance animation
-    gsap.fromTo(sidebarRef.current, 
-      { x: -80, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
-    )
-
-  }, [])
+  }, [isMobile])
 
   const handleMouseEnter = () => {
-    if (!sidebarRef.current) return
+    if (!sidebarRef.current || isMobile) return
     
     setIsExpanded(true)
 
@@ -169,7 +194,7 @@ export function Sidebar() {
   }
 
   const handleMouseLeave = () => {
-    if (!sidebarRef.current) return
+    if (!sidebarRef.current || isMobile) return
     
     setIsExpanded(false)
 
@@ -192,6 +217,63 @@ export function Sidebar() {
     })
   }
 
+  const toggleMobileMenu = () => {
+    if (!sidebarRef.current || !mobileOverlayRef.current) return
+
+    if (isMobileMenuOpen) {
+      // Close mobile menu - simple slide out
+      gsap.to(sidebarRef.current, {
+        x: "-100%",
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (sidebarRef.current) {
+            sidebarRef.current.style.display = "none"
+          }
+        }
+      })
+      
+      gsap.to(mobileOverlayRef.current, {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (mobileOverlayRef.current) {
+            mobileOverlayRef.current.style.display = "none"
+          }
+        }
+      })
+    } else {
+      // Open mobile menu - simple slide in
+      if (sidebarRef.current) {
+        sidebarRef.current.style.display = "block"
+      }
+      
+      if (mobileOverlayRef.current) {
+        mobileOverlayRef.current.style.display = "block"
+      }
+      
+      gsap.fromTo(mobileOverlayRef.current, 
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.inOut" }
+      )
+      
+      gsap.to(sidebarRef.current, {
+        x: "0%",
+        duration: 0.3,
+        ease: "power2.inOut"
+      })
+    }
+    
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    if (isMobileMenuOpen) {
+      toggleMobileMenu()
+    }
+  }
+
   const getActivePage = () => {
     if (pathname === '/') return 'home'
     if (pathname === '/about') return 'about'
@@ -202,17 +284,48 @@ export function Sidebar() {
   }
 
   return (
-    <aside
-      ref={sidebarRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="fixed top-0 left-0 h-screen bg-card/95 backdrop-blur-xl border-r border-primary/20 z-50 shadow-2xl overflow-hidden"
-      style={{
-        backdropFilter: 'blur(20px)',
-        background: 'hsl(var(--card) / 0.95)',
-        width: '80px' // Initial collapsed width
-      }}
-    >
+    <>
+      {/* Mobile Hamburger Button */}
+      {isMobile && (
+        <button
+          onClick={toggleMobileMenu}
+          className="fixed top-4 right-4 z-50 w-12 h-12 bg-card/95 backdrop-blur-xl border border-primary/20 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          style={{
+            backdropFilter: 'blur(20px)',
+            background: 'hsl(var(--card) / 0.95)',
+          }}
+        >
+          {isMobileMenuOpen ? (
+            <XIcon className="w-6 h-6 text-foreground" />
+          ) : (
+            <MenuIcon className="w-6 h-6 text-foreground" />
+          )}
+        </button>
+      )}
+
+      {/* Mobile Overlay */}
+      {isMobile && (
+        <div
+          ref={mobileOverlayRef}
+          onClick={closeMobileMenu}
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+          style={{ display: 'none' }}
+        />
+      )}
+
+      <aside
+        ref={sidebarRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`fixed top-0 left-0 h-screen border-r border-primary/20 shadow-2xl overflow-hidden ${
+          isMobile ? 'z-50 bg-white' : 'z-50 bg-card/95 backdrop-blur-xl'
+        }`}
+        style={{
+          backdropFilter: isMobile ? 'none' : 'blur(20px)',
+          background: isMobile ? 'white' : 'hsl(var(--card) / 0.95)',
+          width: isMobile ? '280px' : '80px' // Mobile: full width, Desktop: collapsed width
+        }}
+      >
       <div className="flex flex-col h-full">
         {/* Header */}
         <div className="p-4 border-b border-primary/10 flex items-center">
@@ -244,8 +357,9 @@ export function Sidebar() {
               <Link
                 key={item.id}
                 href={item.href}
+                onClick={isMobile ? closeMobileMenu : undefined}
                 className={`group flex items-center p-3 rounded-xl transition-all duration-300 hover:shadow-lg ${
-                  isActive && isExpanded
+                  isActive && (isExpanded || isMobile)
                     ? 'bg-primary text-primary-foreground shadow-md' 
                     : isActive
                     ? 'text-primary-foreground'
@@ -253,7 +367,7 @@ export function Sidebar() {
                 }`}
               >
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 flex-shrink-0 ${
-                  isActive && isExpanded
+                  isActive && (isExpanded || isMobile)
                     ? 'bg-primary-foreground/20' 
                     : isActive
                     ? 'bg-primary/20'
@@ -284,7 +398,7 @@ export function Sidebar() {
                   </div>
                 </div>
 
-                {isActive && isExpanded && (
+                {isActive && (isExpanded || isMobile) && (
                   <ChevronRight className="w-3 h-3 text-primary-foreground animate-pulse ml-auto flex-shrink-0" />
                 )}
               </Link>
@@ -341,5 +455,6 @@ export function Sidebar() {
         </div>
       </div>
     </aside>
+    </>
   )
 }
