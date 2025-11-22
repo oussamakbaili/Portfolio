@@ -44,6 +44,26 @@ export function WorksSection() {
     setIsModalOpen(true)
   }
 
+  const handleTitleClick = (project: any, e: React.MouseEvent) => {
+    e.stopPropagation() // Empêche le clic sur la carte
+    
+    // Pour CARAGENCY, rediriger vers toubcar.com
+    if (project.title === "CARAGENCY") {
+      window.open("https://toubcar.com/", "_blank")
+      return
+    }
+    
+    // Pour SYSTÈME D'ARCHIVAGE, rediriger vers espace.aiais.org
+    if (project.title === "SYSTÈME D'ARCHIVAGE") {
+      window.open("https://espace.aiais.org/", "_blank")
+      return
+    }
+    
+    // Pour les autres projets, ouvrir la modal
+    setSelectedProject(project)
+    setIsModalOpen(true)
+  }
+
   const closeModal = () => {
     setIsModalOpen(false)
     setSelectedProject(null)
@@ -104,6 +124,20 @@ export function WorksSection() {
       features: ["Dossiers patients", "Planification RDV", "Tableau de bord", "Historique médical"],
       githubUrl: "https://github.com/oussama-kbaili/gestion-medicale",
       liveUrl: "https://medical.oussama.dev",
+      codeActive: true
+    },
+    {
+      title: "SYSTÈME D'ARCHIVAGE",
+      category: "GESTION",
+      year: "2024",
+      company: "Freelance",
+      description: "Système de gestion d'archives RH et Financières avec éditeur Excel intégré. Application web complète permettant la gestion, l'archivage et la recherche de documents RH et financiers avec fonctionnalités avancées d'édition Excel directement dans l'interface.",
+      image: "/financial-dashboard-charts.png",
+      tech: ["Laravel", "Blade", "PHP", "MySQL", "Excel API"],
+      achievements: ["Gestion centralisée", "Éditeur Excel intégré", "Recherche avancée"],
+      features: ["Archivage RH", "Archivage Financier", "Éditeur Excel", "Recherche documents", "Gestion catégories"],
+      githubUrl: "https://github.com/oussamakbaili/espace-archive-management.git",
+      liveUrl: "https://archive.oussama.dev",
       codeActive: true
     },
     {
@@ -355,7 +389,10 @@ export function WorksSection() {
                 <div className="card-content p-4 sm:p-6 space-y-3 sm:space-y-4">
                   {/* Project Title & Meta */}
                   <div className="space-y-1 sm:space-y-2">
-                    <h3 className="card-title text-lg sm:text-xl font-semibold text-gray-900 dark:text-white leading-tight transition-colors duration-300 group-hover:text-primary">
+                    <h3 
+                      onClick={(e) => handleTitleClick(project, e)}
+                      className="card-title text-lg sm:text-xl font-semibold text-gray-900 dark:text-white leading-tight transition-colors duration-300 group-hover:text-primary cursor-pointer hover:text-primary"
+                    >
                       {project.title}
                     </h3>
                     <div className="card-meta flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
