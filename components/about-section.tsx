@@ -142,7 +142,7 @@ export function AboutSection() {
   const timeline = [
     {
       year: "2025",
-      company: "CarAgency",
+      company: "ToubCar",
       title: "Web Developer (Freelance)",
       description: "Développement d'un système complet de gestion de location de voitures avec trois tableaux de bord distincts (Admin, Agence, Client). Plateforme robuste permettant la gestion complète du cycle de location : réservations en ligne, gestion de flotte, suivi des paiements, système de wishlist, et interface d'administration avancée.",
       technologies: ["Laravel", "Blade", "PHP", "React", "MySQL", "JavaScript", "Tailwind CSS", "Vite"],

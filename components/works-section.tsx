@@ -47,8 +47,8 @@ export function WorksSection() {
   const handleTitleClick = (project: any, e: React.MouseEvent) => {
     e.stopPropagation() // Empêche le clic sur la carte
     
-    // Pour CARAGENCY, rediriger vers toubcar.com
-    if (project.title === "CARAGENCY") {
+    // Pour ToubCar, rediriger vers toubcar.com
+    if (project.title === "ToubCar") {
       window.open("https://toubcar.com/", "_blank")
       return
     }
@@ -71,7 +71,7 @@ export function WorksSection() {
 
   const projects = [
     {
-      title: "CARAGENCY",
+      title: "ToubCar",
       category: "E-COMMERCE",
       year: "2025",
       company: "Freelance",
