@@ -88,7 +88,7 @@ export function WorksSection() {
       title: "SYSTÈME D'ARCHIVAGE",
       category: "GESTION",
       year: "2025",
-      company: "Freelance",
+      company: "Association Initiative Al Amal",
       description: "Système de gestion d'archives RH et Financières avec éditeur Excel intégré. Application web complète permettant la gestion, l'archivage et la recherche de documents RH et financiers avec fonctionnalités avancées d'édition Excel directement dans l'interface.",
       image: "/financial-dashboard-charts.png",
       tech: ["Laravel", "Blade", "PHP", "MySQL", "Excel API"],
@@ -113,20 +113,6 @@ export function WorksSection() {
       codeActive: true
     },
     {
-      title: "SUPERSTOCK",
-      category: "GESTION",
-      year: "2023",
-      company: "Société SCZ Le Chameau",
-      description: "A comprehensive stock management application for supermarkets. SuperStock is a robust web-based stock management application tailored for supermarket operations. Developed by Imad Guidouh as a freelance project, this application leverages modern web technologies to provide an efficient and user-friendly solution for inventory control. Key Features: User management with role-based access control, Product catalog management, Purchase and sales order processing, Supplier and customer relationship management, Real-time stock tracking and updates, Automated invoice generation. The application is built with a focus on scalability and ease of use, making it suitable for supermarkets of various sizes. It demonstrates the effective use of UML diagrams, including use case and class diagrams, in the design process, ensuring a well-structured and maintainable codebase.",
-      image: "/financial-dashboard-charts.png",
-      tech: ["Django", "HTML", "CSS", "JavaScript", "Tailwind CSS"],
-      achievements: ["Role-based Access", "Real-time Updates", "UML Design", "Scalable Architecture"],
-      features: ["User Management", "Product Catalog", "Order Processing", "Supplier Management", "Real-time Tracking", "Invoice Generation"],
-      githubUrl: "https://github.com/oussamakbaili/Gestion-de-stock.git",
-      liveUrl: "https://superstock.oussama.dev",
-      codeActive: true
-    },
-    {
       title: "GESTION MÉDICALE",
       category: "HEALTHCARE",
       year: "2024",
@@ -138,6 +124,20 @@ export function WorksSection() {
       features: ["Dossiers patients", "Planification RDV", "Tableau de bord", "Historique médical"],
       githubUrl: "https://github.com/oussama-kbaili/gestion-medicale",
       liveUrl: "https://medical.oussama.dev",
+      codeActive: true
+    },
+    {
+      title: "SUPERSTOCK",
+      category: "GESTION",
+      year: "2023",
+      company: "Société SCZ Le Chameau",
+      description: "A comprehensive stock management application for supermarkets. SuperStock is a robust web-based stock management application tailored for supermarket operations. Developed by Imad Guidouh as a freelance project, this application leverages modern web technologies to provide an efficient and user-friendly solution for inventory control. Key Features: User management with role-based access control, Product catalog management, Purchase and sales order processing, Supplier and customer relationship management, Real-time stock tracking and updates, Automated invoice generation. The application is built with a focus on scalability and ease of use, making it suitable for supermarkets of various sizes. It demonstrates the effective use of UML diagrams, including use case and class diagrams, in the design process, ensuring a well-structured and maintainable codebase.",
+      image: "/financial-dashboard-charts.png",
+      tech: ["Django", "HTML", "CSS", "JavaScript", "Tailwind CSS"],
+      achievements: ["Role-based Access", "Real-time Updates", "UML Design", "Scalable Architecture"],
+      features: ["User Management", "Product Catalog", "Order Processing", "Supplier Management", "Real-time Tracking", "Invoice Generation"],
+      githubUrl: "https://github.com/oussamakbaili/Gestion-de-stock.git",
+      liveUrl: "https://superstock.oussama.dev",
       codeActive: true
     },
     {

@@ -144,9 +144,17 @@ export function AboutSection() {
       year: "2025",
       company: "CarAgency",
       title: "Web Developer (Freelance)",
-      description: "Développement d'une plateforme e-commerce complète pour la vente de véhicules d'occasion avec système de recherche avancée, galerie photos interactive, calculatrice de financement, et interface d'administration pour la gestion des stocks et des ventes.",
-      technologies: ["Laravel", "React", "MySQL", "Stripe API"],
-      achievements: ["+40% de conversion", "Interface responsive", "Système de paiement sécurisé"]
+      description: "Développement d'un système complet de gestion de location de voitures avec trois tableaux de bord distincts (Admin, Agence, Client). Plateforme robuste permettant la gestion complète du cycle de location : réservations en ligne, gestion de flotte, suivi des paiements, système de wishlist, et interface d'administration avancée.",
+      technologies: ["Laravel", "Blade", "PHP", "React", "MySQL", "JavaScript", "Tailwind CSS", "Vite"],
+      achievements: ["3 Tableaux de bord", "Gestion multi-rôles", "Système de réservation", "Interface moderne"]
+    },
+    {
+      year: "2025",
+      company: "Association Initiative Al Amal",
+      title: "Web Developer - Système d'Archivage",
+      description: "Développement d'un système de gestion d'archives RH et Financières avec éditeur Excel intégré. Application web complète permettant la gestion, l'archivage et la recherche de documents RH et financiers avec fonctionnalités avancées d'édition Excel directement dans l'interface.",
+      technologies: ["Laravel", "Blade", "PHP", "MySQL", "Excel API"],
+      achievements: ["Gestion centralisée", "Éditeur Excel intégré", "Recherche avancée"]
     },
     {
       year: "2025",
@@ -155,14 +163,6 @@ export function AboutSection() {
       description: "Développement d'une plateforme web unifiée pour l'administration, enseignants et étudiants avec automatisation de présence via QR Code et gestion complète des cours, notes et emplois du temps.",
       technologies: ["Laravel", "HTML5", "CSS3", "JavaScript", "QR Code API"],
       achievements: ["Automatisation 100%", "Interface intuitive", "Gestion temps réel"]
-    },
-    {
-      year: "2025",
-      company: "Moroccan Chess and Gaming Club",
-      title: "Testeur & Quality Consultant (Freelance)",
-      description: "Assurance qualité des versions bêta, collaboration avec l'équipe de développement pour identifier et corriger les anomalies techniques, adoption des meilleures pratiques de développement.",
-      technologies: ["Testing Tools", "JIRA", "Git", "CI/CD"],
-      achievements: ["-60% de bugs", "Processus optimisé", "Qualité améliorée"]
     },
     {
       year: "2024",
@@ -181,7 +181,7 @@ export function AboutSection() {
       achievements: ["Temps réel", "PDF automatique", "Traçabilité complète"]
     },
     {
-      year: "2021",
+      year: "2023",
       company: "Arcane Studios",
       title: "Développeur Backend (Freelance)",
       description: "Développement d'APIs robustes et solutions backend sur mesure incluant systèmes de gestion de données, authentification utilisateurs et logique métier pour projets clients.",
