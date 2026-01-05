@@ -234,7 +234,7 @@ export function SkillsSection() {
   ]
 
   return (
-    <section ref={sectionRef} id="skills" className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
+    <section ref={sectionRef} id="skills" className="py-16 sm:py-32 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
       {/* Subtle Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-64 h-64 bg-emerald-100 dark:bg-emerald-900/20 rounded-full blur-3xl opacity-60"></div>
@@ -470,7 +470,7 @@ export function SkillsSection() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center py-12 sm:py-16">
+        <div className="text-center pb-8 sm:pb-12">
           <div className="gsap-fade-in opacity-100">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               Ready to Work Together?
