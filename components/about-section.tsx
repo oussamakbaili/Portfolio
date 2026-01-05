@@ -142,11 +142,21 @@ export function AboutSection() {
   const timeline = [
     {
       year: "2025",
+      company: "Club des Dirigeants des Associations Maroc",
+      title: "Web Developer - CDDAM",
+      description: "Développement d'une plateforme web complète pour le Club des Dirigeants des Associations Maroc (CDDAM), une communauté dédiée aux leaders associatifs marocains. Solution full-stack moderne intégrant un système de gestion de membres, packs d'adhésion, gestion d'activités et événements, blog interactif, témoignages, partenariats stratégiques, et espace membre MyCDDAM. Architecture robuste avec authentification multi-niveaux, interface d'administration avancée, et support multilingue (FR, AR, EN) via i18next.",
+      technologies: ["Laravel 10", "PHP", "MySQL", "React 18", "React Router", "Vite", "Bootstrap 5.3", "i18next", "Axios", "HTML5", "CSS3", "JavaScript"],
+      achievements: ["Architecture Full-Stack", "Multilingue (FR/AR/EN)", "Gestion complète", "Interface moderne"],
+      url: "https://cddam.org/"
+    },
+    {
+      year: "2025",
       company: "ToubCar",
       title: "Web Developer (Freelance)",
       description: "Développement d'un système complet de gestion de location de voitures avec trois tableaux de bord distincts (Admin, Agence, Client). Plateforme robuste permettant la gestion complète du cycle de location : réservations en ligne, gestion de flotte, suivi des paiements, système de wishlist, et interface d'administration avancée.",
       technologies: ["Laravel", "Blade", "PHP", "React", "MySQL", "JavaScript", "Tailwind CSS", "Vite"],
-      achievements: ["3 Tableaux de bord", "Gestion multi-rôles", "Système de réservation", "Interface moderne"]
+      achievements: ["3 Tableaux de bord", "Gestion multi-rôles", "Système de réservation", "Interface moderne"],
+      url: "https://toubcar.com/"
     },
     {
       year: "2025",
@@ -154,7 +164,8 @@ export function AboutSection() {
       title: "Web Developer - Système d'Archivage",
       description: "Développement d'un système de gestion d'archives RH et Financières avec éditeur Excel intégré. Application web complète permettant la gestion, l'archivage et la recherche de documents RH et financiers avec fonctionnalités avancées d'édition Excel directement dans l'interface.",
       technologies: ["Laravel", "Blade", "PHP", "MySQL", "Excel API"],
-      achievements: ["Gestion centralisée", "Éditeur Excel intégré", "Recherche avancée"]
+      achievements: ["Gestion centralisée", "Éditeur Excel intégré", "Recherche avancée"],
+      url: "https://espace.aiais.org/"
     },
     {
       year: "2025",
@@ -162,7 +173,8 @@ export function AboutSection() {
       title: "Web Developer (Stage)",
       description: "Développement d'une plateforme web unifiée pour l'administration, enseignants et étudiants avec automatisation de présence via QR Code et gestion complète des cours, notes et emplois du temps.",
       technologies: ["Laravel", "HTML5", "CSS3", "JavaScript", "QR Code API"],
-      achievements: ["Automatisation 100%", "Interface intuitive", "Gestion temps réel"]
+      achievements: ["Automatisation 100%", "Interface intuitive", "Gestion temps réel"],
+      url: null
     },
     {
       year: "2024",
@@ -170,7 +182,8 @@ export function AboutSection() {
       title: "Web Developer (Stage)",
       description: "Conception et développement d'une plateforme web de gestion médicale avec interfaces intuitives pour la gestion des dossiers patients, planification des rendez-vous et tableau de bord dynamique.",
       technologies: ["Laravel", "HTML", "CSS", "JavaScript", "Tailwind CSS"],
-      achievements: ["Solution complète", "Interface ergonomique", "Prêt production"]
+      achievements: ["Solution complète", "Interface ergonomique", "Prêt production"],
+      url: null
     },
     {
       year: "2023",
@@ -178,7 +191,8 @@ export function AboutSection() {
       title: "Web Developer (Stage)",
       description: "Développement de SuperStock, une plateforme de gestion de stock avec calcul automatique en temps réel, génération de factures et bons de commande PDF, et suivi des mouvements de stock.",
       technologies: ["Django", "HTML", "CSS", "JavaScript", "Tailwind CSS"],
-      achievements: ["Temps réel", "PDF automatique", "Traçabilité complète"]
+      achievements: ["Temps réel", "PDF automatique", "Traçabilité complète"],
+      url: null
     },
     {
       year: "2023",
@@ -186,7 +200,8 @@ export function AboutSection() {
       title: "Développeur Backend (Freelance)",
       description: "Développement d'APIs robustes et solutions backend sur mesure incluant systèmes de gestion de données, authentification utilisateurs et logique métier pour projets clients.",
       technologies: ["Django", "Laravel", "MySQL", "PostgreSQL", "REST APIs"],
-      achievements: ["APIs performantes", "Livraison rapide", "Solutions sur mesure"]
+      achievements: ["APIs performantes", "Livraison rapide", "Solutions sur mesure"],
+      url: null
     }
   ]
 
@@ -301,7 +316,14 @@ export function AboutSection() {
                   <div className="absolute left-4 top-2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg"></div>
                   
                   {/* Content */}
-                  <div className="bg-card/50 rounded-2xl p-6 border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:scale-105 group">
+                  <div 
+                    className={`bg-card/50 rounded-2xl p-6 border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:scale-105 group ${item.url ? 'cursor-pointer' : ''}`}
+                    onClick={() => {
+                      if (item.url) {
+                        window.open(item.url, '_blank', 'noopener,noreferrer')
+                      }
+                    }}
+                  >
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-sm font-bold text-primary-foreground bg-primary px-3 py-1 rounded-full shadow-sm">
                         {item.year}
@@ -309,6 +331,9 @@ export function AboutSection() {
                       <span className="text-sm text-muted-foreground font-medium">
                         {item.company}
                       </span>
+                      {item.url && (
+                        <ExternalLink className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-auto" />
+                      )}
                     </div>
                     
                     <h4 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">

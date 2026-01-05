@@ -47,6 +47,12 @@ export function WorksSection() {
   const handleTitleClick = (project: any, e: React.MouseEvent) => {
     e.stopPropagation() // Empêche le clic sur la carte
     
+    // Pour CDDAM, rediriger vers cddam.org
+    if (project.title === "CDDAM") {
+      window.open("https://cddam.org/", "_blank")
+      return
+    }
+    
     // Pour ToubCar, rediriger vers toubcar.com
     if (project.title === "ToubCar") {
       window.open("https://toubcar.com/", "_blank")
@@ -70,6 +76,20 @@ export function WorksSection() {
   }
 
   const projects = [
+    {
+      title: "CDDAM",
+      category: "ASSOCIATION",
+      year: "2025",
+      company: "Club des Dirigeants des Associations Maroc",
+      description: "Plateforme web complète pour le Club des Dirigeants des Associations Maroc (CDDAM), une communauté dédiée aux leaders associatifs marocains. Solution full-stack moderne intégrant un système de gestion de membres, packs d'adhésion, gestion d'activités et événements, blog interactif, témoignages, partenariats stratégiques, et espace membre MyCDDAM. Architecture robuste avec authentification multi-niveaux, interface d'administration avancée, et support multilingue (FR, AR, EN) via i18next. Plateforme conçue pour faciliter le réseautage, le partage d'expériences et le développement professionnel des dirigeants d'associations au Maroc.",
+      image: "/placeholder.svg",
+      tech: ["Laravel 10", "PHP", "MySQL", "React 18", "React Router", "Vite", "Bootstrap 5.3", "i18next", "Axios", "HTML5", "CSS3", "JavaScript"],
+      achievements: ["Architecture Full-Stack", "Multilingue (FR/AR/EN)", "Gestion complète", "Interface moderne"],
+      features: ["Gestion membres", "Packs adhésion", "Activités & Événements", "Blog interactif", "Témoignages", "Partenariats", "Espace MyCDDAM", "Administration avancée", "Newsletter", "Recherche avancée"],
+      githubUrl: "",
+      liveUrl: "https://cddam.org/",
+      codeActive: false
+    },
     {
       title: "ToubCar",
       category: "E-COMMERCE",
