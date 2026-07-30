@@ -58,10 +58,22 @@ export function WorksSection() {
       window.open("https://toubcar.com/", "_blank")
       return
     }
+
+    // Pour ToubCar Mobile, rediriger vers le dépôt GitHub
+    if (project.title === "ToubCar Mobile") {
+      window.open("https://github.com/oussamakbaili/ToubCar-Mobile", "_blank")
+      return
+    }
     
     // Pour SYSTÈME D'ARCHIVAGE, rediriger vers espace.aiais.org
     if (project.title === "SYSTÈME D'ARCHIVAGE") {
       window.open("https://espace.aiais.org/", "_blank")
+      return
+    }
+
+    // Pour INSCRIPTION AIAIS, rediriger vers le dépôt / site live
+    if (project.title === "INSCRIPTION AIAIS" && project.liveUrl) {
+      window.open(project.liveUrl, "_blank")
       return
     }
     
@@ -91,9 +103,23 @@ export function WorksSection() {
       codeActive: false
     },
     {
+      title: "INSCRIPTION AIAIS",
+      category: "GESTION",
+      year: "2026",
+      company: "Association Initiative Al Amal",
+      description: "Plateforme web de gestion des candidatures et bénéficiaires pour l'Association Initiative Al Amal. Les étudiants et professionnels soumettent leur dossier en ligne avec documents (CIN, baccalauréat, relevés), tandis que les administrateurs examinent, acceptent ou refusent les candidatures via un tableau de bord. Notifications email automatiques et suivi des bénéficiaires par niveau d'études.",
+      image: "/images/inscription.png",
+      tech: ["Laravel", "Blade", "PHP", "MySQL", "JavaScript", "Tailwind CSS", "Laravel Mail"],
+      achievements: ["Candidatures en ligne", "Espace admin", "Notifications email"],
+      features: ["Formulaire candidature", "Upload documents", "Tableau de bord", "Acceptation / Refus", "Gestion bénéficiaires", "Filtrage & recherche", "Emails automatiques"],
+      githubUrl: "https://github.com/oussamakbaili/Inscription-AIAIS",
+      liveUrl: "https://inscription.aiais.org/",
+      codeActive: true
+    },
+    {
       title: "ToubCar",
       category: "E-COMMERCE",
-      year: "2025",
+      year: "2026",
       company: "Freelance",
       description: "Système complet de gestion de location de voitures avec trois tableaux de bord distincts (Admin, Agence, Client). Plateforme robuste permettant la gestion complète du cycle de location : réservations en ligne, gestion de flotte, suivi des paiements, système de wishlist, et interface d'administration avancée. Solution full-stack développée avec Laravel et React, offrant une expérience utilisateur optimale et une gestion efficace des opérations de location automobile.",
       image: "/images/Toubcar.png",
@@ -101,6 +127,20 @@ export function WorksSection() {
       achievements: ["3 Tableaux de bord", "Gestion multi-rôles", "Système de réservation", "Interface moderne"],
       features: ["Dashboard Admin", "Dashboard Agence", "Dashboard Client", "Gestion de flotte", "Système de réservation", "Wishlist", "Gestion des paiements", "Recherche avancée"],
       githubUrl: "https://github.com/oussamakbaili/CarAgency.git",
+      liveUrl: "https://toubcar.com/",
+      codeActive: true
+    },
+    {
+      title: "ToubCar Mobile",
+      category: "MOBILE",
+      year: "2026",
+      company: "Freelance",
+      description: "Application mobile Expo / React Native pour ToubCar, connectée à l'API de production. Expérience native pour clients, agences et administrateurs : recherche de véhicules, réservations, messagerie, paiements et notifications push. Architecture moderne avec Expo Router, React Query et Zustand, alignée sur les fonctionnalités de la plateforme web.",
+      image: "/images/toubcar-mobile.png",
+      tech: ["React Native", "Expo", "TypeScript", "Expo Router", "React Query", "Zustand", "Axios", "EAS"],
+      achievements: ["App multi-rôles", "Notifications push", "Parité web/mobile"],
+      features: ["Recherche véhicules", "Réservations", "Messagerie", "Paiements", "Espace Admin", "Espace Agence", "Notifications push", "Auth sécurisée"],
+      githubUrl: "https://github.com/oussamakbaili/ToubCar-Mobile",
       liveUrl: "https://toubcar.com/",
       codeActive: true
     },
