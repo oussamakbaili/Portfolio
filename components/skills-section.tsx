@@ -32,7 +32,7 @@ export function SkillsSection() {
   const toolsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!sectionRef.current || !skillsRef.current || !toolsRef.current) return
+    if (!sectionRef.current || !toolsRef.current) return
 
     // Header animation
     const headerElements = sectionRef.current.querySelectorAll('.gsap-fade-in')
@@ -104,23 +104,25 @@ export function SkillsSection() {
     )
 
     // Skills progress bars animation
-    const progressBars = skillsRef.current.querySelectorAll('.progress-bar')
-    progressBars.forEach((bar) => {
-      const width = bar.getAttribute('data-width')
-      gsap.fromTo(bar, 
-        { width: 0 },
-        {
-          width: `${width}%`,
-          duration: 2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: bar,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
+    if (skillsRef.current) {
+      const progressBars = skillsRef.current.querySelectorAll('.progress-bar')
+      progressBars.forEach((bar) => {
+        const width = bar.getAttribute('data-width')
+        gsap.fromTo(bar, 
+          { width: 0 },
+          {
+            width: `${width}%`,
+            duration: 2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: bar,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      )
-    })
+        )
+      })
+    }
 
   }, [])
 
@@ -234,7 +236,7 @@ export function SkillsSection() {
   ]
 
   return (
-    <section ref={sectionRef} id="skills" className="py-16 sm:py-32 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
+    <section ref={sectionRef} id="skills" className="pt-8 sm:pt-10 pb-8 sm:pb-10 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
       {/* Subtle Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-64 h-64 bg-emerald-100 dark:bg-emerald-900/20 rounded-full blur-3xl opacity-60"></div>
@@ -244,13 +246,13 @@ export function SkillsSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Professional Header */}
-        <div className="text-center py-12 sm:py-16 lg:py-24">
+        <div className="text-center pb-8 sm:pb-10">
           <div className="gsap-fade-in" style={{ opacity: 1 }}>
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
               <Award className="w-3 h-3 sm:w-4 sm:h-4" />
               Professional Expertise
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 dark:text-white leading-tight mb-4 sm:mb-6 relative z-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-3 sm:mb-4 relative z-10">
               Skills & 
               <span className="block" style={{ color: '#00745a' }}>
                 Expertise
@@ -265,10 +267,10 @@ export function SkillsSection() {
 
 
         {/* Technology Stack Section */}
-        <div className="mb-16 sm:mb-20">
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="gsap-slide-up">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4 relative z-10">
+        <div className="mb-10 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="gsap-slide-up opacity-100">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2 sm:mb-3 relative z-10">
                 Technology Stack
               </h2>
               <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto px-4">
@@ -323,10 +325,10 @@ export function SkillsSection() {
         </div>
 
         {/* Mobile Development Section */}
-        <div className="mb-20">
-          <div className="text-center mb-16">
+        <div className="mb-10 sm:mb-12">
+          <div className="text-center mb-6 sm:mb-8">
             <div className="gsap-slide-up opacity-100">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">
                 Mobile Development
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
@@ -431,9 +433,9 @@ export function SkillsSection() {
         </div>
 
         {/* Professional Stats */}
-        <div className="mb-16 sm:mb-20">
+        <div className="mb-10 sm:mb-12">
           <div className="gsap-fade-in opacity-100">
-            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-emerald-200 dark:border-emerald-800">
+            <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-emerald-200 dark:border-emerald-800">
               <div className="text-center mb-6 sm:mb-8">
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
                   Professional Impact
@@ -470,7 +472,7 @@ export function SkillsSection() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center pb-8 sm:pb-12">
+        <div className="text-center">
           <div className="gsap-fade-in opacity-100">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
               Ready to Work Together?
