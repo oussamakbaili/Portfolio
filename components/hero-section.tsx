@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { X } from "lucide-react"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
@@ -11,9 +12,10 @@ if (typeof window !== "undefined") {
 export function HeroSection() {
   const heroRef = useRef<HTMLElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLButtonElement>(null)
   const floatingRef = useRef<HTMLDivElement>(null)
   const cursorRef = useRef<HTMLDivElement>(null)
+  const [isPhotoOpen, setIsPhotoOpen] = useState(false)
 
   useEffect(() => {
     if (!heroRef.current || !titleRef.current || !imageRef.current || !floatingRef.current) return
@@ -83,6 +85,22 @@ export function HeroSection() {
 
   }, [])
 
+  useEffect(() => {
+    if (!isPhotoOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsPhotoOpen(false)
+    }
+
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = ""
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isPhotoOpen])
+
   return (
     <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
       {/* Animated background elements */}
@@ -97,7 +115,13 @@ export function HeroSection() {
         <div className="bg-card/50 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-6 sm:p-12 border border-primary/20 shadow-2xl">
           <div className="flex flex-col items-center text-center space-y-6 sm:space-y-8">
             {/* Profile Image */}
-            <div ref={imageRef} className="relative group">
+            <button
+              type="button"
+              ref={imageRef}
+              onClick={() => setIsPhotoOpen(true)}
+              className="relative group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-full"
+              aria-label="Voir la photo de profil en grand"
+            >
               {/* Glow effect */}
               <div className="absolute inset-0 bg-primary/30 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform duration-500"></div>
               
@@ -109,7 +133,7 @@ export function HeroSection() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-            </div>
+            </button>
 
             {/* Name */}
             <div className="space-y-2">
@@ -170,6 +194,32 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Full-size profile photo lightbox */}
+      {isPhotoOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setIsPhotoOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo de profil"
+        >
+          <button
+            type="button"
+            onClick={() => setIsPhotoOpen(false)}
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            aria-label="Fermer"
+          >
+            <X className="w-5 h-5 text-white" />
+          </button>
+          <img
+            src="/ussama.jpg"
+            alt="Oussama Kbaili — photo de profil"
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   )
 }
