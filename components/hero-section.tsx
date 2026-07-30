@@ -140,9 +140,6 @@ export function HeroSection() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
                 Oussama Kbaili
               </h1>
-              <p className="text-base sm:text-lg text-muted-foreground underline">
-                @oussama_kbaili
-              </p>
             </div>
 
             {/* Bio */}
