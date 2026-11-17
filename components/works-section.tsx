@@ -64,6 +64,21 @@ export function WorksSection() {
       window.open("https://github.com/oussamakbaili/ToubCar-Mobile", "_blank")
       return
     }
+
+    if (project.title === "Bento Chef Samir" && project.liveUrl) {
+      window.open(project.liveUrl, "_blank")
+      return
+    }
+
+    if (project.title === "Didasko" && project.liveUrl) {
+      window.open(project.liveUrl, "_blank")
+      return
+    }
+
+    if (project.title === "Henzo Sushi" && project.liveUrl) {
+      window.open(project.liveUrl, "_blank")
+      return
+    }
     
     // Pour SYSTÈME D'ARCHIVAGE, rediriger vers espace.aiais.org
     if (project.title === "SYSTÈME D'ARCHIVAGE") {
@@ -101,6 +116,48 @@ export function WorksSection() {
       githubUrl: "https://github.com/oussamakbaili/ToubCar-Mobile",
       liveUrl: "https://toubcar.com/",
       codeActive: true
+    },
+    {
+      title: "Bento Chef Samir",
+      category: "RESTAURATION",
+      year: "2026",
+      company: "Bento Chef Samir",
+      description: "Interface de caisse pour Bento Chef Samir. La prise de commande s'appuie sur le catalogue complet : sélection des produits, panier en direct, choix entre sur place et livraison, application des promotions, puis confirmation avec impression du reçu. L'outil couvre aussi l'historique des commandes, le Z du jour et la consultation des produits.",
+      image: "/images/bento.png",
+      tech: ["Laravel", "PHP", "JavaScript", "HTML5", "CSS3"],
+      achievements: ["Caisse complète", "Panier en direct", "Reçu imprimable"],
+      features: ["Nouvelle commande", "Catalogue produits", "Sur place et livraison", "Promotions", "Historique", "Z du jour", "Impression du reçu", "Totaux HT et TTC"],
+      githubUrl: "",
+      liveUrl: "https://bentochefsamir.store/",
+      codeActive: false
+    },
+    {
+      title: "Didasko",
+      category: "ÉDUCATION",
+      year: "2026",
+      company: "Didasko International School",
+      description: "Site vitrine de Didasko International School, école privée trilingue à Casablanca, de la maternelle au lycée. La plateforme présente l'établissement, ses quatre cycles, la vie scolaire et la galerie, puis accompagne les familles vers la découverte de l'école et la préparation de l'inscription.",
+      image: "/images/didasko.png",
+      tech: ["Astro", "Vite", "HTML5", "CSS3", "JavaScript"],
+      achievements: ["Site vitrine", "Quatre cycles", "Parcours d'inscription"],
+      features: ["Présentation de l'école", "Cycles scolaires", "Vie à Didasko", "Galerie", "Admissions", "Prise de contact"],
+      githubUrl: "https://github.com/oussamakbaili/DidaskoSchool",
+      liveUrl: "https://didasko.ma/",
+      codeActive: true
+    },
+    {
+      title: "Henzo Sushi",
+      category: "RESTAURATION",
+      year: "2026",
+      company: "Henzo Sushi",
+      description: "Plateforme de commande en ligne pour Henzo Sushi à Casablanca. Le menu est organisé par catégories, des boxes aux pièces signature, avec un panier, le suivi de commande et une interface bilingue français / anglais. Le parcours est pensé pour consulter l'offre clairement et commander sans friction.",
+      image: "/images/henzo.png",
+      tech: ["Laravel", "PHP", "Tailwind CSS", "JavaScript", "Vite"],
+      achievements: ["Commande en ligne", "Menu bilingue", "Suivi de commande"],
+      features: ["Catalogue sushi", "Boxes et formules", "Panier", "Suivi de commande", "Français et anglais", "Livraison"],
+      githubUrl: "",
+      liveUrl: "https://henzo-sushi.com/",
+      codeActive: false
     },
     {
       title: "ToubCar",
