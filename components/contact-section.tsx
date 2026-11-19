@@ -33,6 +33,7 @@ export function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('Something went wrong. Please try again.')
   
   const sectionRef = useRef<HTMLElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
@@ -148,6 +149,7 @@ export function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus('idle')
+    setErrorMessage('Something went wrong. Please try again.')
 
     try {
       const response = await fetch('/api/send-email', {
@@ -170,7 +172,8 @@ export function ContactSection() {
         })
       } else {
         const errorData = await response.json()
-        console.error('Erreur:', errorData.error)
+        console.error('Erreur:', errorData.error, errorData.details)
+        setErrorMessage(errorData.error || 'Something went wrong. Please try again.')
         setSubmitStatus('error')
       }
     } catch (error) {
@@ -414,7 +417,7 @@ export function ContactSection() {
                 {submitStatus === 'error' && (
                   <div className="flex items-center gap-3 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-4 rounded-xl border border-red-200 dark:border-red-800">
                     <AlertCircle className="w-5 h-5" />
-                    <span className="font-medium">Something went wrong. Please try again.</span>
+                    <span className="font-medium">{errorMessage}</span>
                   </div>
                 )}
               </form>
