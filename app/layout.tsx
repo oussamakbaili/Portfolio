@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
+import { LogoIntro } from '@/components/logo-intro'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -45,6 +47,10 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
+        <Script id="intro-boot" strategy="beforeInteractive">
+          {`try{var q=new URLSearchParams(location.search);if(q.has('replay-intro')){sessionStorage.removeItem('ok-intro-seen');document.documentElement.classList.remove('intro-done')}else if(sessionStorage.getItem('ok-intro-seen')){document.documentElement.classList.add('intro-done')}}catch(e){}`}
+        </Script>
+        <LogoIntro />
         {children}
       </body>
     </html>
