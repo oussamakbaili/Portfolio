@@ -109,20 +109,6 @@ export function WorksSection() {
 
   const projects = [
     {
-      title: "SolHub",
-      category: "JEUX",
-      year: "2026",
-      company: "Freelance",
-      description: "Plateforme web dédiée au solitaire : encyclopédie des variantes, jeux jouables directement dans le navigateur et guides de stratégie. De Klondike à Spider, FreeCell ou Pyramid, SolHub regroupe les règles, les conseils et l'accès immédiat aux parties, sans téléchargement ni inscription.",
-      image: "/images/onlinesolitaire.png",
-      tech: ["HTML5", "CSS3", "JavaScript"],
-      achievements: ["Jeux en navigateur", "Guides de stratégie", "Multiples variantes"],
-      features: ["Klondike", "Spider Solitaire", "FreeCell", "Pyramid", "TriPeaks", "Guides débutant à avancé", "Blog hebdomadaire", "Sans téléchargement"],
-      githubUrl: "",
-      liveUrl: "https://onlinesolitaire.online/",
-      codeActive: false
-    },
-    {
       title: "Henzo Sushi",
       category: "RESTAURATION",
       year: "2026",
@@ -191,6 +177,20 @@ export function WorksSection() {
       githubUrl: "https://github.com/oussamakbaili/CarAgency.git",
       liveUrl: "https://toubcar.com/",
       codeActive: true
+    },
+    {
+      title: "SolHub",
+      category: "JEUX",
+      year: "2026",
+      company: "Freelance",
+      description: "Plateforme web dédiée au solitaire : encyclopédie des variantes, jeux jouables directement dans le navigateur et guides de stratégie. De Klondike à Spider, FreeCell ou Pyramid, SolHub regroupe les règles, les conseils et l'accès immédiat aux parties, sans téléchargement ni inscription.",
+      image: "/images/onlinesolitaire.png",
+      tech: ["HTML5", "CSS3", "JavaScript"],
+      achievements: ["Jeux en navigateur", "Guides de stratégie", "Multiples variantes"],
+      features: ["Klondike", "Spider Solitaire", "FreeCell", "Pyramid", "TriPeaks", "Guides débutant à avancé", "Blog hebdomadaire", "Sans téléchargement"],
+      githubUrl: "",
+      liveUrl: "https://onlinesolitaire.online/",
+      codeActive: false
     },
     {
       title: "CDDAM",
